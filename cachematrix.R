@@ -7,18 +7,21 @@
 ## replace the cached value.
 
 ## makeCacheMatrix() is a closure that acts as simple cache
-## for the inverse matrix calculated by using cacheSolve().
-## It takes a matrix as a parameter, checks the closure
-## for the results for this matrix and returns the results
-## if found or NULL if not found.
+## for a matrix and its inverse.  when cacheSolve()
+## sends a matrix as a parameter, makeCacheMatrix() checks
+## the inner closure for existing matrix-results pair that matches
+## this matrix and either returns the results, if found
+## or NULL if not found.
 makeCacheMatrix <- function(checkMatrix = matrix()) {
   invMatrix <- NULL
   setMatrix <- function(newMatrix) {
     checkMatrix <<- newMatrix
     invMatrix <<- NULL
   }
-
-
+  getMatrix <- function() checkMatrix
+  setInverse <- function(InverseMatrix) invMatrix <<- InverseMatrix
+  getInverse <- function() invMatrix
+  list(setMatrix = setMatrix, getMatrix = getMatrix, setInverse = setInverse, getInverse = getInverse)
 }
 
 
