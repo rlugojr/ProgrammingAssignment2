@@ -25,11 +25,12 @@ makeCacheMatrix <- function(checkMatrix = matrix()) {
 }
 
 
-## cacheSolve takes a matrix as a parameter and passes the matrix
-## to makeCacheMatrix(). It then either displays the cached inverse
-## returned by makeCacheMatrix or,if NULL is returned, calculates
-## the inverse of the matrix and sends the result to makeCacheMatrix
-## for caching until the next time the same matrix is to be calculated.
+## cacheSolve() takes a matrix as a parameter and calls makeCacheMatrix()
+## which returns either the cached result of this matrix or NULL.
+## If NULL is returned, the matrix inverse is calculated and
+## the result is stored in makeCacheMatrix() for retrieval the next time
+## the same matrix is to be calculated.  If NULL is not returned then
+## cacheSolve() uses the cached result that is returned from makeCacheMatrix.
 
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
