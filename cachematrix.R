@@ -11,8 +11,12 @@
 ## It takes a matrix as a parameter, checks the closure
 ## for the results for this matrix and returns the results
 ## if found or NULL if not found.
-makeCacheMatrix <- function(currMatrix = matrix()) {
+makeCacheMatrix <- function(checkMatrix = matrix()) {
   invMatrix <- NULL
+  setMatrix <- function(newMatrix) {
+    checkMatrix <<- newMatrix
+    invMatrix <<- NULL
+  }
 
 
 }
