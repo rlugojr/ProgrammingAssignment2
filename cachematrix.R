@@ -6,12 +6,8 @@
 ## A new matrix would, require calculation and would also
 ## replace the cached value.
 
-## makeCacheMatrix() is a closure that acts as simple cache
-## for a matrix and its inverse.  when cacheSolve()
-## sends a matrix as a parameter, makeCacheMatrix() checks
-## the inner closure for existing matrix-results pair that matches
-## this matrix and either returns the results, if found
-## or NULL if not found.
+## makeCacheMatrix() is a matrix object with an inner closure that acts as simple cache
+## for the matrix and its inverse.
 makeCacheMatrix <- function(checkMatrix = matrix()) {
   invMatrix <- NULL
   setMatrix <- function(newMatrix) {
@@ -25,13 +21,18 @@ makeCacheMatrix <- function(checkMatrix = matrix()) {
 }
 
 
-## cacheSolve() takes a matrix as a parameter and calls makeCacheMatrix()
-## which returns either the cached result of this matrix or NULL.
-## If NULL is returned, the matrix inverse is calculated and
-## the result is stored in makeCacheMatrix() for retrieval the next time
-## the same matrix is to be calculated.  If NULL is not returned then
-## cacheSolve() uses the cached result that is returned from makeCacheMatrix.
+## cacheSolve() takes the matrix object makeCacheMatrix()
+## and checks for the cached inverse of the matrix.
+## Then either the cached version is returned or it
+## calulates the inverse matrix and stores the result in
+## the cache.
 
-cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+cacheSolve <- function(m, ...) {
+  cachedVal <- m$getInverse
+  if (!is.null(cachedVal)){
+      message("using cached data")
+      return(cachedVal)
+  }
+
+
 }
